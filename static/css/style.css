@@ -1,0 +1,96 @@
+:root {
+  --fg: #1a1a1a;
+  --bg: #fdfdfc;
+  --muted: #6b6b6b;
+  --accent: #0b5fa5;
+  --rule: #e2e2df;
+  --code-bg: #f4f4f1;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #dcdcd8;
+    --bg: #16181a;
+    --muted: #8f9296;
+    --accent: #7fb2e5;
+    --rule: #2c2f33;
+    --code-bg: #1e2124;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+  max-width: 44rem;              /* ~72 caractères : la longueur de ligne qui se lit */
+  font: 1.0625rem/1.65 -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+  hyphens: auto;
+}
+
+a { color: var(--accent); }
+a:hover { text-decoration-thickness: 2px; }
+
+/* ---- chrome ---- */
+header.site, footer.site {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: 1.5rem 0; font-size: .9rem;
+}
+header.site { border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+footer.site { border-top: 1px solid var(--rule); margin-top: 4rem; color: var(--muted); }
+.brand { font-weight: 600; text-decoration: none; color: var(--fg); }
+
+/* ---- index ---- */
+ul.index { list-style: none; padding: 0; }
+ul.index li { padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+ul.index time { display: block; font-size: .8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+ul.index a { font-size: 1.15rem; font-weight: 600; text-decoration: none; }
+ul.index p { margin: .35rem 0 0; color: var(--muted); font-size: .95rem; }
+
+/* ---- article ---- */
+article h1 { font-size: 1.95rem; line-height: 1.2; margin: 0 0 .4rem; letter-spacing: -.01em; }
+article h2 { font-size: 1.35rem; margin: 2.75rem 0 .75rem; line-height: 1.25; }
+article h3 { font-size: 1.1rem;  margin: 2rem 0 .5rem; }
+.meta { color: var(--muted); font-size: .875rem; margin: 0 0 2.5rem; }
+
+blockquote {
+  margin: 1.5rem 0; padding: .1rem 0 .1rem 1.1rem;
+  border-left: 3px solid var(--rule); color: var(--muted);
+}
+
+/* ---- code ---- */
+code {
+  font-family: ui-monospace, "JetBrains Mono", "Fira Code", monospace;
+  font-size: .875em;
+  background: var(--code-bg);
+  padding: .12em .35em;
+  border-radius: 3px;
+}
+pre {
+  background: var(--code-bg);
+  padding: .9rem 1rem;
+  border-radius: 5px;
+  overflow-x: auto;            /* le bloc scrolle, jamais la page */
+  font-size: .875rem;
+  line-height: 1.5;
+}
+pre code { background: none; padding: 0; font-size: 1em; }
+
+/* ---- tableaux : nombreux dans les fiches, et souvent larges ---- */
+table { border-collapse: collapse; width: 100%; font-size: .92rem; margin: 1.5rem 0; }
+th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; }
+.table-wrap { overflow-x: auto; }
+
+/* ---- sommaire repliable ---- */
+details.toc {
+  margin: 0 0 2.5rem; padding: .75rem 1rem;
+  border: 1px solid var(--rule); border-radius: 5px; font-size: .92rem;
+}
+details.toc summary { cursor: pointer; font-weight: 600; }
+details.toc ul { margin: .75rem 0 .25rem; padding-left: 1.1rem; }
+details.toc a { text-decoration: none; }
+
+img { max-width: 100%; height: auto; }
+hr { border: none; border-top: 1px solid var(--rule); margin: 2.5rem 0; }

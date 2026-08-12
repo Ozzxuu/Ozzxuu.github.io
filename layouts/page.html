@@ -1,0 +1,17 @@
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ if not .Params.unlisted }}
+  <p class="meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
+    · {{ .ReadingTime }} min
+  </p>
+  {{ end }}
+
+  {{ if ge (len .TableOfContents) 100 }}
+  <details class="toc"><summary>Sommaire</summary>{{ .TableOfContents }}</details>
+  {{ end }}
+
+  {{ .Content }}
+</article>
+{{ end }}

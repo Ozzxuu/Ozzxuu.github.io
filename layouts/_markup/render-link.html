@@ -1,0 +1,18 @@
+{{- $u := urls.Parse .Destination -}}
+{{- $href := .Destination -}}
+{{- $ext := false -}}
+
+{{- if $u.Path -}}
+  {{- with .Page.GetPage $u.Path -}}
+    {{/* Lien interne : le .md est résolu en page, on prend son URL publique */}}
+    {{- $href = .RelPermalink -}}
+    {{- with $u.Fragment }}{{ $href = printf "%s#%s" $href . }}{{ end -}}
+  {{- else -}}
+    {{- if $u.Scheme }}{{ $ext = true }}{{ end -}}
+    {{- if strings.HasSuffix $u.Path ".md" -}}
+      {{- warnf "LIEN MORT : %q depuis %q" .Destination .Page.File.Path -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+<a href="{{ $href }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $ext }} rel="noopener" target="_blank"{{ end }}>{{ .Text | safeHTML }}</a>

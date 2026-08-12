@@ -12,7 +12,8 @@
 <body>
   <header class="site">
     <a class="brand" href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
-    <nav><a href="{{ "/lexique/" | relURL }}">Lexique</a></nav>
+    {{/* Absent du build prod tant que le lexique est en draft — pas de lien mort. */}}
+    <nav>{{ with .Site.GetPage "/lexique" }}<a href="{{ .RelPermalink }}">Lexique</a>{{ end }}</nav>
   </header>
 
   <main>{{ block "main" . }}{{ end }}</main>

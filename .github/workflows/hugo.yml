@@ -21,13 +21,23 @@ jobs:
     env:
       HUGO_VERSION: 0.164.0
     steps:
-      - name: Installer Hugo
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb \
-            https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
-          sudo dpkg -i ${{ runner.temp }}/hugo.deb
-
       - uses: actions/checkout@v4
+
+      # Téléchargement AUTHENTIFIÉ via gh (préinstallé sur le runner) : l'endpoint anonyme
+      # releases/download rend des 503 sous charge. 3 essais espacés pour le reste.
+      - name: Installer Hugo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in 1 2 3; do
+            gh release download "v${HUGO_VERSION}" --repo gohugoio/hugo \
+              --pattern "hugo_extended_${HUGO_VERSION}_linux-amd64.deb" \
+              --output "${{ runner.temp }}/hugo.deb" && break
+            echo "tentative $i échouée, nouvel essai dans ${i}0 s"
+            sleep "${i}0"
+          done
+          sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+          hugo version
 
       - uses: actions/configure-pages@v5
         id: pages

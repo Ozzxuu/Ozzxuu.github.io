@@ -1,0 +1,5 @@
+# Options actives UNIQUEMENT pour `hugo serve` (environnement "development" par défaut).
+# La CI lance `hugo`, qui est en "production" et ignore ce fichier : les drafts
+# ne peuvent pas partir en ligne par accident.
+buildDrafts = true
+navigateToChanged = true

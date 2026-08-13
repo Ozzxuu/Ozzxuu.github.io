@@ -1,6 +1,5 @@
 ---
-title: "Accueil"
+title: "Blog"
 ---
 
-Des notes de terrain sur ce qui casse, et pourquoi. Linux, bas niveau, reverse engineering,
-réseau. Écrites après coup, une fois le problème compris — pas des tutoriels.
+## Simple blog with my experiences and somes stuff for some problems
